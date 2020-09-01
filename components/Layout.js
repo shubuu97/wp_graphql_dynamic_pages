@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 
 const Layout = ({ menus, children }) => {
-   console.log(menus, "menus");
    return (
       <div>
          <header>
@@ -16,7 +15,7 @@ const Layout = ({ menus, children }) => {
                {(menus || []).map((menu) => {
                   const path = menu.node.path.replace("/wordpress_woo", "");
                   return (
-                     <Link key={menu?.node?.id ?? ""} href="/[menu]" as={path}>
+                     <Link key={menu?.node?.id ?? ""} href="[...slug]" as={path}>
                         <a
                            style={{
                               fontSize: "18px",
