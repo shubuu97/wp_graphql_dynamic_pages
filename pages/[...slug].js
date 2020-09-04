@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { GET_MENUS } from "../gql/getMenus";
 import client from "../apollo/client";
 import * as MenuItems from "../components/menuTemplates";
-import fetchData from "../utils/fetchData";
 
 const Menu = ({ data }) => {
     const router = useRouter();
@@ -38,7 +37,28 @@ export async function getServerSideProps({ params }) {
         query: GET_MENUS,
     });
 
-    let templateData = fetchData(route);
+    let templateData = {};
+
+    let url = "";
+    switch (route) {
+        case "about":
+            url = "https://jsonplaceholder.typicode.com/posts";
+            break;
+        case "contact-us":
+            url = "https://jsonplaceholder.typicode.com/comments";
+            break;
+        case "treding":
+            url = "https://jsonplaceholder.typicode.com/albums";
+            break;
+        default:
+            break;
+    }
+    console.log(url, "url");
+    if (url) {
+        const response = await fetch(url);
+        templateData = await response.json();
+    }
+    console.log(templateData, "templateData");
 
     return {
         props: {
