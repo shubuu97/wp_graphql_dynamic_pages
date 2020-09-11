@@ -1,8 +1,10 @@
 import React from "react";
 import { GET_MENUS } from "../gql/getMenus";
-import client from "../apollo/client";
+import { useQuery } from "@apollo/client";
 
 const Home = () => {
+    const data = useQuery(GET_MENUS);
+
     return (
         <div
             style={{
@@ -18,11 +20,3 @@ const Home = () => {
 };
 
 export default Home;
-
-export async function getServerSideProps({}) {
-    const { data } = await client.query({
-        query: GET_MENUS,
-    });
-
-    return { props: { menus: data?.headerMenus?.edges ?? [] } };
-}

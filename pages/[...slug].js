@@ -53,13 +53,10 @@ export async function getServerSideProps({ params }) {
         default:
             break;
     }
-    console.log(url, "url");
     if (url) {
         const response = await fetch(url);
         templateData = await response.json();
     }
-    console.log(templateData, "templateData");
-
     return {
         props: {
             menus: data?.headerMenus?.edges ?? [],

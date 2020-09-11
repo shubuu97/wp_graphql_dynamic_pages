@@ -20,6 +20,7 @@ const options = {
 const cache = new InMemoryCache(options);
 const link = createHttpLink({
   uri: process.env.NEXT_PUBLIC_MENU_ITEMS_URL,
+  credentials: "include",
 });
 
 const client = new ApolloClient({
